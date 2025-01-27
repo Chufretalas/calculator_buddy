@@ -35,41 +35,50 @@ def main():
 
     sleep(0.2)
 
-    commands: str = pgui.prompt(
-        "Please type desired sequence of commands. Use * and /  for multiplication and division. Use a comma as the decimal separator."
-    )
+    while True:
 
-    sleep(0.1)
+        commands: str = pgui.prompt(
+            "Please type desired sequence of commands. Use * and /  for multiplication and division."
+        )
 
-    calc_window = getWindowsWithTitle("Calculadora")[0]
-    if not calc_window.isActive:
-        pgui.press("altleft")
-        calc_window.activate()
+        sleep(0.1)
 
-    sleep(0.1)
+        calc_window = getWindowsWithTitle("Calculadora")[0]
+        if not calc_window.isActive:
+            pgui.press("altleft")
+            calc_window.activate()
 
-    for c in commands:
-        if c.isnumeric():
-            click_button(f"{c}.png")
-            continue
-        match c:
-            case ",":
-                click_button("comma.png")
+        sleep(0.1)
 
-            case "/":
-                click_button("div.png")
+        for c in commands:
+            if c.isnumeric():
+                click_button(f"{c}.png")
+                continue
 
-            case "=":
-                click_button("equals.png")
+            match c.lower():
+                case "c":
+                    click_button("c.png")
 
-            case "-":
-                click_button("minus.png")
+                case ",":
+                    click_button("comma.png")
 
-            case "*":
-                click_button("mul.png")
+                case ".":
+                    click_button("comma.png")
 
-            case "+":
-                click_button("plus.png")
+                case "/":
+                    click_button("div.png")
+
+                case "=":
+                    click_button("equals.png")
+
+                case "-":
+                    click_button("minus.png")
+
+                case "*":
+                    click_button("mul.png")
+
+                case "+":
+                    click_button("plus.png")
 
 
 if __name__ == "__main__":
